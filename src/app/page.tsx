@@ -4,7 +4,7 @@ import ChatWindow from '@/components/ChatWindow'
 
 export default function Home() {
   return (
-	<main className='flex h-screen w-screen'>
+	<main className='flex min-h-screen w-screen'>
 		<Sidebar />
 		<ChatWindow />
 	</main>
