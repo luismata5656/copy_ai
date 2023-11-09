@@ -25,8 +25,9 @@ const config: Config = {
 			'primary':'#343541',
 			'secondary':'#202123',
 			'secondary-2':'#40414F',
-			'secondary-3':'#40414F',
+			'secondary-3':'#4D4D4F',
 			'accent':'#19C37D',
+			'white':'#ECECF1',
 
 		},
 
