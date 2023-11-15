@@ -2,20 +2,26 @@
 import { useState } from 'react';
 import RightSidebar from '@/components/RightSidebar';
 import ChatWindow from '@/components/ChatWindow'
+import LeftSidebar from '@/components/LeftSidebar';
 
 
 export default function Home() {
-	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+	const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
+	const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
 
-	const toggleSidebar = () => {
-		setIsSidebarOpen(!isSidebarOpen);
+	const toggleLeftSidebar = () => {
+		setIsLeftSidebarOpen(!isLeftSidebarOpen);
+	};
+	const toggleRightSidebar = () => {
+		setIsRightSidebarOpen(!isRightSidebarOpen);
 	};
 	return (
 			<main className='flex h-screen w-screen bg-default-primary overflow-x-hidden'>
-				<RightSidebar isOpen={isSidebarOpen} onClose={() => toggleSidebar()}/>
+				<LeftSidebar isOpen={isLeftSidebarOpen} onClose={() => toggleLeftSidebar()}/>
 				<div className='flex-1 p-4'>
 				<ChatWindow />
 				</div>
+				<RightSidebar isOpen={isRightSidebarOpen} onClose={() => toggleRightSidebar()}/>
 			</main>
 	)
 }
