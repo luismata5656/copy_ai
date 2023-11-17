@@ -11,13 +11,13 @@ interface SidebarProps {
 const RightSidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   return (
     <div
-      className={`fixed top-0 right-0 h-full z-50 bg-default-secondary text-white transform ease-in-out duration-300 ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
+      className={`fixed top-0 right-0 h-full bg-default-secondary text-white transform ease-in-out duration-300 w-screen sm:w-max ${
+        isOpen ? 'translate-x-0 z-50' : 'translate-x-full z-0'
       } lg:relative lg:translate-x-0`}
     >
       <button
         onClick={onClose}
-        className="absolute -left-10 top-2 lg:hidden"
+        className={`absolute top-2 lg:hidden ${isOpen ? 'left-4 sm:-left-10' : '-left-10'}`}
       >
 	  {isOpen ? (
 		<TbLayoutSidebarRightCollapseFilled className="m-2 h-6 w-6" />
@@ -25,7 +25,7 @@ const RightSidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 		<TbLayoutSidebarRightExpandFilled className="m-2 h-6 w-6" />
 		)}
 	  </button>
-      <nav className="flex flex-col space-y-4 p-8">
+      <nav className="flex flex-col space-y-4 p-8 mt-4">
         {/* Navigation Links */}
         <a href="/dashboard" className="hover:bg-gray-700 p-2 rounded">
           Dashboard

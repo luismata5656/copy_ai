@@ -1,6 +1,11 @@
 import React from 'react'
 
-export default function Message({isUser}: {isUser: boolean}) {
+type Message = {
+  message: string;
+  isUser: boolean;
+};
+
+const Message: React.FC<Message> = ({isUser, message}) => {
 return (
 	<>
 		{isUser ? (
@@ -9,7 +14,7 @@ return (
 				User
 			</div>
 			<div className='w-full p-2 text-right'>
-				This is a message from the User for the Computer
+				{message}
 			</div>
 		</>
 		) : (
@@ -18,10 +23,12 @@ return (
 				Computer
 			</div>
 			<div className='w-full p-2 '>
-				This is a message from the Computer for the User
+				{message}
 			</div>
 		</>
 		)}
 	</>
 )
 }
+
+export default Message;
