@@ -2,19 +2,19 @@ import React, {useState} from 'react';
 import {FaGoogle, FaGithub} from 'react-icons/fa';
 
 interface AuthenticationProps {
-	showRegister: Function,
+	showLogin: Function,
 }
 
-const Auth: React.FC<AuthenticationProps> = ({showRegister}) => {
+const Register: React.FC<AuthenticationProps> = ({showLogin}) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [Cpassword, setCPassword] = useState('');
 
 	// Placeholder function to handle form submission
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		console.log('Email:', email);
 		console.log('Password:', password);
-		// Here you could call your backend API
 	};
 
 	return (
@@ -37,7 +37,7 @@ const Auth: React.FC<AuthenticationProps> = ({showRegister}) => {
 							required
 						/>
 					</div>
-					<div className="mb-6">
+					<div className="mb-4">
 						<label className="block text-default-white text-sm font-bold mb-2" htmlFor="password">
 							Password
 						</label>
@@ -51,21 +51,35 @@ const Auth: React.FC<AuthenticationProps> = ({showRegister}) => {
 							required
 						/>
 					</div>
+					<div className="mb-6">
+						<label className="block text-default-white text-sm font-bold mb-2" htmlFor="password">
+							Confirm Password
+						</label>
+						<input
+							className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+							id="cpassword"
+							type="password"
+							placeholder="Confirm your password"
+							value={Cpassword}
+							onChange={(e) => setCPassword(e.target.value)}
+							required
+						/>
+					</div>
 					<div className="flex flex-col gap-2 sm:flex-row items-center justify-between">
 						<button
 							className="whitespace-nowrap bg-default-secondary hover:bg-default-secondary-3 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 							type="submit"
 						>
-							Sign In
+							Register
 						</button>
 						<div className='text-sm whitespace-nowrap mx-auto flex flex-col gap-1 items-center'>
-						Don't have an account? 
+						Already have an account? 
 						<button
 							className="bg-default-secondary-2 hover:bg-default-secondary-3 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 							type="button"
-							onClick={() => showRegister()}
+							onClick={() => showLogin()}
 						>
-							Register
+							Login
 						</button>
 						</div>
 					</div>
@@ -84,4 +98,4 @@ const Auth: React.FC<AuthenticationProps> = ({showRegister}) => {
 	);
 };
 
-export default Auth;
+export default Register;
