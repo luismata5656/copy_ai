@@ -64,7 +64,7 @@ const Auth: React.FC<AuthenticationProps> = () => {
 							className="bg-default-secondary-2 hover:bg-default-secondary-3 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 							type="submit"
 						>
-							Register
+							register
 						</button>
 						</div>
 					</div>
