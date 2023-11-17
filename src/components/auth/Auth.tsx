@@ -59,12 +59,12 @@ const Auth: React.FC<AuthenticationProps> = () => {
 							Sign In
 						</button>
 						<div className='text-sm whitespace-nowrap mx-auto flex flex-col gap-1 items-center'>
-						Don't have an account? 
+						Don \&apos t have an account? 
 						<button
 							className="bg-default-secondary-2 hover:bg-default-secondary-3 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 							type="submit"
 						>
-							register
+							Register
 						</button>
 						</div>
 					</div>
