@@ -25,15 +25,29 @@ const RightSidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 		<TbLayoutSidebarRightExpandFilled className="m-2 h-6 w-6" />
 		)}
 	  </button>
-      <nav className="flex flex-col space-y-4 p-8 mt-4">
-        {/* Navigation Links */}
-        <a href="/dashboard" className="hover:bg-gray-700 p-2 rounded">
-          Dashboard
-        </a>
-        <a href="/settings" className="hover:bg-gray-700 p-2 rounded">
-          Settings
-        </a>
-        {/* Add more navigation links here */}
+      <nav className="flex flex-col h-full space-y-4 px-4 pt-8">
+				<div className='flex-1 flex flex-col'>
+					<button className='px-4 py-2 hover:bg-default-secondary-3 text-default-white'>
+					Input
+					</button>
+					<button className='px-4 py-2 hover:bg-default-secondary-3 text-default-white'>
+					Input
+					</button>
+					<button className='px-4 py-2 hover:bg-default-secondary-3 text-default-white'>
+					Input
+					</button>
+					<button className='px-4 py-2 hover:bg-default-secondary-3 text-default-white'>
+					Input
+					</button>
+					<button className='px-4 py-2 hover:bg-default-secondary-3 text-default-white'>
+					Input
+					</button>
+				</div>
+				<div className='flex items-center gap-4 border-t w-full px-4 py-8 border-default-accent'>
+					<div className=''>
+						Workflows
+					</div>
+				</div>
       </nav>
     </div>
   );

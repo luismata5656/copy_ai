@@ -26,8 +26,8 @@ const LeftSidebar: React.FC<SidebarProps> = ({isOpen, onClose, showSettings}) =>
 				)}
 			</button>
 			<nav className="flex flex-col h-full space-y-4 px-2 pt-8">
-				<div className='flex-1'>
-					<button className='w-full px-4 py-2 hover:bg-default-secondary-3 text-default-white'>
+				<div className='flex-1 flex flex-col'>
+					<button className='px-4 py-2 hover:bg-default-secondary-3 text-default-white'>
 						Assistant 2
 					</button>
 				</div>
