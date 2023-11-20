@@ -1,6 +1,5 @@
 "use client"
 import {useState} from 'react';
-import RightSidebar from '@/components/RightSidebar';
 import LeftSidebar from '@/components/LeftSidebar';
 import MessageList from '@/components/chat/MessageList';
 import Auth from '@/components/auth/Auth'
@@ -21,13 +20,9 @@ export default function Home() {
 	];
 
 	const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
-	const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
 
 	const toggleLeftSidebar = () => {
 		setIsLeftSidebarOpen(!isLeftSidebarOpen);
-	};
-	const toggleRightSidebar = () => {
-		setIsRightSidebarOpen(!isRightSidebarOpen);
 	};
 
 	const [isRegisterOpen, setIsRegisterOpen] = useState(false)
@@ -63,7 +58,6 @@ export default function Home() {
 					)}
 				</div>
 			</div>
-			<RightSidebar isOpen={isRightSidebarOpen} onClose={() => toggleRightSidebar()} />
 			<SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
 		</main>
 	)
