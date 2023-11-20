@@ -5,21 +5,17 @@ const config: Config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+	"./node_modules/flowbite-react/**/*.js",
   ],
   theme: {
 	colors: {
-		'w-gray': {
-			'50': '#f1f6fc',
-			'100': '#e6eef9',
-			'200': '#d2dff3',
-			'300': '#b7caea',
-			'400': '#99ade0',
-			'500': '#8092d4',
-			'600': '#6773c4',
-			'700': '#626bb2',
-			'800': '#48518b',
-			'900': '#3f4670',
-			'950': '#252841',
+		'default': {
+			'primary':'#343541',
+			'secondary':'#202123',
+			'secondary-2':'#40414F',
+			'secondary-3':'#4D4D4F',
+			'accent':'#19C37D',
+			'white':'#ECECF1',
 		},
 
 	},
@@ -31,6 +27,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+	  require('flowbite/plugin')
+  ],
 }
 export default config
