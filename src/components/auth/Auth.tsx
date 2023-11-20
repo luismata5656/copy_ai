@@ -9,11 +9,8 @@ const Auth: React.FC<AuthenticationProps> = ({showRegister}) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	// Placeholder function to handle form submission
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log('Email:', email);
-		console.log('Password:', password);
 		// Here you could call your backend API
 	};
 

@@ -32,6 +32,7 @@ export default function Home() {
 
 	const [isRegisterOpen, setIsRegisterOpen] = useState(false)
 	const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+
 	return (
 		<main className='flex h-screen w-screen bg-default-primary overflow-x-hidden'>
 			<LeftSidebar isOpen={isLeftSidebarOpen} onClose={() => toggleLeftSidebar()} showSettings={() => setIsSettingsOpen(true)} />
