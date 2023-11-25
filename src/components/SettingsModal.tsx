@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -6,9 +6,11 @@ interface SettingsModalProps {
 }
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState('light');
   const [apiKeys, setApiKeys] = useState({
-    OpenAI: "",
+    firstKey: '',
+    secondKey: '',
+    thirdKey: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,27 +23,22 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   return (
     <div
       className={`${
-        isOpen ? "flex" : "hidden"
+        isOpen ? 'flex' : 'hidden'
       } fixed inset-0 z-50 overflow-auto bg-black bg-opacity-40`}
     >
       <div className="relative p-4 w-full max-w-md m-auto flex-col flex rounded-lg bg-default-secondary">
         <button
           onClick={onClose}
-          className="absolute top-0 right-0 p-1 m-2 rounded-full text-default-white"
+          className="absolute top-0 right-0 p-1 m-2 rounded-full hover:bg-gray-200 text-default-white"
         >
           X
         </button>
 
-        <h3 className="text-lg font-semibold text-center mb-4 text-default-white">
-          Settings
-        </h3>
+        <h3 className="text-lg font-semibold text-center mb-4 text-default-white">Settings</h3>
 
         {/* Theme Dropdown */}
         <div className="mb-4">
-          <label
-            htmlFor="theme"
-            className="block mb-2 text-sm font-medium text-default-white"
-          >
+          <label htmlFor="theme" className="block mb-2 text-sm font-medium text-default-white">
             Theme
           </label>
           <select
@@ -58,12 +55,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
 
         {/* API Keys */}
         <div className="space-y-4">
-          {["OpenAI"].map((key) => (
+          {['firstKey', 'secondKey', 'thirdKey'].map((key) => (
             <div key={key}>
-              <label
-                htmlFor={key}
-                className="block mb-2 text-sm font-medium text-default-white"
-              >
+              <label htmlFor={key} className="block mb-2 text-sm font-medium text-default-white">
                 {`${key} API Key`}
               </label>
               <input
@@ -88,9 +82,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
             Cancel
           </button>
           <button
-            onClick={() => {
-              /* Handle save logic here */
-            }}
+            onClick={() => { /* Handle save logic here */ }}
             className="px-4 py-2 text-sm font-medium text-white bg-default-primary rounded-lg hover:bg-default-secondary-3 focus:ring-2 focus:ring-blue-400"
           >
             Save
