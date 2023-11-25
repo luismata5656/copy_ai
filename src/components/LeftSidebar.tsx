@@ -5,6 +5,7 @@ import {
   TbLayoutSidebarLeftExpandFilled,
   TbSettings,
 } from "react-icons/tb";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface SidebarProps {
   // Define any props you need, for example:
@@ -18,6 +19,7 @@ const LeftSidebar: React.FC<SidebarProps> = ({
   onClose,
   showSettings,
 }) => {
+  const { user } = useAuth();
   return (
     <div
       className={`fixed top-0 left-0 h-full bg-default-secondary text-white transform ease-in-out duration-300 w-screen sm:w-max ${
@@ -42,15 +44,17 @@ const LeftSidebar: React.FC<SidebarProps> = ({
             Assistant 1
           </button>
         </div>
-        <div className="flex items-center gap-4 border-t w-full px-4 py-8 border-default-accent">
-          <div className="flex-1">Profile</div>
-          <button
-            className="hover:bg-default-secondary-3 rounded-full p-2"
-            onClick={showSettings}
-          >
-            <TbSettings className="h-5 w-5" />
-          </button>
-        </div>
+        {user && (
+          <div className="flex items-center gap-4 border-t w-full px-4 py-8 border-default-accent">
+            <div className="flex-1">Profile</div>
+            <button
+              className="hover:bg-default-secondary-3 rounded-full p-2"
+              onClick={showSettings}
+            >
+              <TbSettings className="h-5 w-5" />
+            </button>
+          </div>
+        )}
       </nav>
     </div>
   );

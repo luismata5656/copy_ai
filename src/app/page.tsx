@@ -6,6 +6,7 @@ import Auth from "@/components/auth/Auth";
 import Register from "@/components/auth/Register";
 import SettingsModal from "@/components/SettingsModal";
 import Notification from "@/components/notifications/Notification";
+import { useAuth } from "@/contexts/AuthContext";
 
 // Define the shape of a single notification.
 interface INotification {
@@ -38,15 +39,13 @@ type Message = {
 };
 
 export default function Home() {
-  const isAuthenticated = false;
-
+  const { user } = useAuth();
   const [notifications, setNotifications] = useState<INotification[]>([]);
   const addNotification = (
     type: INotification["type"],
     message: string,
     timeout: number = 3000,
   ) => {
-    console.log("Adding notification");
     // Generate a unique ID for each notification.
     const id = Math.random().toString(36).substr(2, 9);
     const newNotification = { id, type, message };
@@ -99,7 +98,7 @@ export default function Home() {
       />
       <div className="flex-1">
         <div className="flex flex-col justify-start items-center w-full h-full p-0 overflow-y-auto">
-          {isAuthenticated ? (
+          {user ? (
             <>
               <div className="w-full h-full text-default-white mt-0 mb-32">
                 <MessageList messages={messages} />

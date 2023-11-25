@@ -1,13 +1,21 @@
-import React, { useState } from "react";
-import { FaGoogle, FaGithub } from "react-icons/fa";
+import { auth, githubLogin, googleLogin } from "@/app/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/app/firebaseConfig";
+import React, { useState } from "react";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 interface AuthenticationProps {
   showLogin: Function;
+  addNotification: (
+    type: "info" | "success" | "warning" | "error",
+    message: string,
+    timeout?: number,
+  ) => void;
 }
 
-const Register: React.FC<AuthenticationProps> = ({ showLogin }) => {
+const Register: React.FC<AuthenticationProps> = ({
+  showLogin,
+  addNotification,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [Cpassword, setCPassword] = useState("");
@@ -15,17 +23,31 @@ const Register: React.FC<AuthenticationProps> = ({ showLogin }) => {
   // Placeholder function to handle form submission
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
-      const user = userCredential.user;
-      console.log(user);
-    } catch (error) {
-      console.log(error);
+    if (password !== Cpassword) {
+      addNotification("error", "Passwords do not match");
+      return;
     }
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        addNotification("success", "Account created successfully");
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            addNotification("error", "Email already in use");
+            break;
+          case "auth/invalid-email":
+            addNotification("error", "Invalid email address");
+            break;
+          case "auth/weak-password":
+            addNotification("error", "Weak password");
+            break;
+          default:
+            addNotification("error", "Something went wrong");
+            break;
+        }
+      });
   }
 
   return (
@@ -103,15 +125,15 @@ const Register: React.FC<AuthenticationProps> = ({ showLogin }) => {
       </form>
       <div className="flex flex-col items-center gap-4 mt-6">
         <button
-          className="flex flex-row justify-center bg-default-secondary hover:bg-default-secondary-3 p-4 items-center gap-2 whitespace-nowrap "
-          onClick={() => console.log("google")}
+          className="flex flex-row justify-center bg-default-primary text-white hover:bg-default-secondary-3 p-4 items-center gap-2 whitespace-nowrap "
+          onClick={() => googleLogin()}
         >
           <FaGoogle className="text-2xl" />
           Login with Google
         </button>
         <button
-          className="flex flex-row justify-center bg-default-secondary hover:bg-default-secondary-3 p-4 items-center gap-2 whitespace-nowrap "
-          onClick={() => console.log("google")}
+          className="flex flex-row justify-center bg-default-primary text-white hover:bg-default-secondary-3 p-4 items-center gap-2 whitespace-nowrap "
+          onClick={() => githubLogin()}
         >
           <FaGithub className="text-2xl" />
           Login with Github

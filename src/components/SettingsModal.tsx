@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "@/app/firebaseConfig";
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -77,6 +79,19 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
               />
             </div>
           ))}
+        </div>
+
+        {/* Sign Out */}
+        <div className="flex justify-end space-x-2 mt-4">
+          <button
+            onClick={() => {
+              signOut(auth);
+              onClose();
+            }}
+            className="px-4 py-2 text-sm font-medium text-white bg-default-primary rounded-lg hover:bg-default-secondary-3 focus:ring-2 focus:ring-blue-400"
+          >
+            Sign Out
+          </button>
         </div>
 
         {/* Actions */}

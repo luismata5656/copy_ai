@@ -24,6 +24,7 @@ const Auth: React.FC<AuthenticationProps> = ({
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        addNotification("success", "Account created successfully");
       })
       .catch((error) => {
         // switch statement to handle different error codes
