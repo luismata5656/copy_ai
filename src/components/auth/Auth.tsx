@@ -22,9 +22,8 @@ const Auth: React.FC<AuthenticationProps> = ({
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        addNotification("success", "Account created successfully");
+      .then(() => {
+        addNotification("success", "Logged in Successfully");
       })
       .catch((error) => {
         // switch statement to handle different error codes

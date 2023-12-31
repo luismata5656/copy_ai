@@ -12,14 +12,16 @@ interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
   showSettings: () => void;
+  newChat: () => void;
 }
 
 const LeftSidebar: React.FC<SidebarProps> = ({
   isOpen,
   onClose,
   showSettings,
+  newChat,
 }) => {
-  const { user } = useAuth();
+  const { user, chats } = useAuth();
   return (
     <div
       className={`fixed top-0 left-0 h-full bg-default-secondary text-white transform ease-in-out duration-300 w-screen sm:w-max ${
@@ -39,21 +41,35 @@ const LeftSidebar: React.FC<SidebarProps> = ({
         )}
       </button>
       <nav className="flex flex-col h-full space-y-4 px-2 pt-8">
-        <div className="flex-1 flex flex-col">
-          <button className="px-4 py-2 hover:bg-default-secondary-3 text-default-white">
-            Assistant 1
-          </button>
-        </div>
         {user && (
-          <div className="flex items-center gap-4 border-t w-full px-4 py-8 border-default-accent">
-            <div className="flex-1">Profile</div>
-            <button
-              className="hover:bg-default-secondary-3 rounded-full p-2"
-              onClick={showSettings}
-            >
-              <TbSettings className="h-5 w-5" />
-            </button>
-          </div>
+          <>
+            <div className="flex items-center gap-4 w-full px-4 border-default-accent">
+              <button
+                className="hover:bg-default-secondary-3 p-2"
+                onClick={newChat}
+              >
+                New Chat
+              </button>
+            </div>
+            <div className="flex-1 flex flex-col">
+              <ul>
+                {chats.map((chatId) => (
+                  <li key={chatId.id}>{chatId.name}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex items-center gap-4 border-t w-full px-4 py-8 border-default-accent">
+              <div className="flex-1">
+                {user.displayName ? user.displayName : user.email}
+              </div>
+              <button
+                className="hover:bg-default-secondary-3 rounded-full p-2"
+                onClick={showSettings}
+              >
+                <TbSettings className="h-5 w-5" />
+              </button>
+            </div>
+          </>
         )}
       </nav>
     </div>

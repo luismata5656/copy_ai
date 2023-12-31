@@ -1,12 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import {
+  addDoc,
+  collection,
+  updateDoc,
+  doc,
+  arrayUnion,
+} from "@firebase/firestore";
+import { db } from "@/app/firebaseConfig";
 import LeftSidebar from "@/components/LeftSidebar";
-import MessageList from "@/components/chat/MessageList";
+import SettingsModal from "@/components/SettingsModal";
 import Auth from "@/components/auth/Auth";
 import Register from "@/components/auth/Register";
-import SettingsModal from "@/components/SettingsModal";
+import MessageList from "@/components/chat/MessageList";
 import Notification from "@/components/notifications/Notification";
 import { useAuth } from "@/contexts/AuthContext";
+import React, { useState } from "react";
 
 // Define the shape of a single notification.
 interface INotification {
@@ -85,6 +93,24 @@ export default function Home() {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
+  async function newChat() {
+    try {
+      if (!user) return;
+      const docRef = await addDoc(collection(db, "chats"), {
+        name: "Test",
+        uid: user ? user.uid : 0,
+      });
+      if (user.chats === undefined) user.chats = [];
+      const userRef = doc(db, "users", user.uid);
+      await updateDoc(userRef, {
+        chats: arrayUnion(docRef.id),
+      });
+      console.log(user.chats);
+      addNotification("success", "New chat created!");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
   return (
     <main className="flex h-screen w-screen bg-default-primary overflow-x-hidden">
       <NotificationContainer
@@ -95,6 +121,7 @@ export default function Home() {
         isOpen={isLeftSidebarOpen}
         onClose={() => toggleLeftSidebar()}
         showSettings={() => setIsSettingsOpen(true)}
+        newChat={() => newChat()}
       />
       <div className="flex-1">
         <div className="flex flex-col justify-start items-center w-full h-full p-0 overflow-y-auto">
