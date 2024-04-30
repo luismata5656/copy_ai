@@ -1,10 +1,11 @@
-import React from 'react';
-import Message from './Message';
+import React from "react";
+import Message from "./Message";
 
 // Define the Message type
 type _Message = {
-  message: string;
-  isUser: boolean;
+  id: string;
+  role: string;
+  content: string;
 };
 
 // Define the props type for the component
@@ -14,13 +15,13 @@ type MessageListProps = {
 
 const MessageList: React.FC<MessageListProps> = ({ messages }) => {
   return (
-    <div className='flex flex-col m-2 sm:p-4 mt-16 space-y-2'>
+    <div className="flex flex-col m-2 sm:p-4 mt-16 space-y-2">
       {messages.length > 0 ? (
-        messages.map((msg, index) => (
-			<Message key={index} isUser={msg.isUser} message={msg.message}/>
+        messages.map((m) => (
+          <Message key={m.id} isUser={false} message={m.content} />
         ))
       ) : (
-        <div className='text-center text-gray-500'>
+        <div className="text-center text-gray-500">
           No messages yet. Start the conversation!
         </div>
       )}
