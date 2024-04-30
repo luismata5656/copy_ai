@@ -8,7 +8,7 @@ const openai = new OpenAI({
 
 export const dynamic = "force-dynamic";
 
-async function POST(req: Request) {
+export async function POST(req: Request) {
   const { messages } = await req.json();
 
   // Ask OpenAI for a streaming chat completion given the prompt
@@ -23,5 +23,3 @@ async function POST(req: Request) {
   // Respond with the stream
   return new StreamingTextResponse(stream);
 }
-
-export default POST;
