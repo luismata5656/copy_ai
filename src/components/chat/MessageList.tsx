@@ -18,7 +18,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages }) => {
     <div className="flex flex-col m-2 sm:p-4 mt-16 space-y-2">
       {messages.length > 0 ? (
         messages.map((m) => (
-          <Message key={m.id} isUser={false} message={m.content} />
+          <Message key={m.id} role={m.role} message={m.content} />
         ))
       ) : (
         <div className="text-center text-gray-500">
